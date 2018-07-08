@@ -24,3 +24,6 @@ $ npm install body-parser --save
 
 ## Instalando express-validator ## 
 $ npm install express-validator --save
+
+## Instalando socket.io ## 
+$ npm install socket.io --save
