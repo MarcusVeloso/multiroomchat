@@ -17,11 +17,29 @@ io.on('connection', function (socket) {
         console.log('Usuario desconectou');
     });
 
+    //MENSAGENS
     socket.on('msgParaServidor', function (data) {
-        socket.emit('msgParaCliente',
+        socket.emit(
+            'msgParaCliente',
             { apelido: data.apelido, mensagem: data.mensagem })
 
-        socket.broadcast.emit('msgParaCliente',
+        socket.broadcast.emit(
+            'msgParaCliente',
             { apelido: data.apelido, mensagem: data.mensagem })
+
+        //PARTICIPANTES
+        console.log("data.apelido_atualizado_nos_clientes: " + data.apelido_atualizado_nos_clientes);
+
+        if (parseInt(data.apelido_atualizado_nos_clientes) == 0) {
+            socket.emit(
+                'participantesParaCliente',
+                { apelido: data.apelido }
+            );
+
+            socket.broadcast.emit(
+                'participantesParaCliente',
+                { apelido: data.apelido }
+            );
+        }
     });
 });
